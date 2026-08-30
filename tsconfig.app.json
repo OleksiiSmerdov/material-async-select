@@ -4,7 +4,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ]
   },
   "include": [
     "src/**/*.ts"
