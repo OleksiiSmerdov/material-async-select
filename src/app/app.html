@@ -1,8 +1,36 @@
 <div class="container">
+  <header class="page-header">
+    <div class="brand">
+      <mat-icon aria-hidden="true"
+        ><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3 7h10v2H3V7zm14 0h4v2h-4V7zm-4-3h4v8h-4V4zM3 15h4v2H3v-2zm8 0h10v2H11v-2zm-4-3h4v8H7v-8z"
+          /></svg></mat-icon
+      ><span>Material playground</span>
+    </div>
+    <span class="edition">MATERIAL 3</span>
+  </header>
+  <section class="intro" aria-labelledby="page-title">
+    <span class="eyebrow">A LITTLE SPACE TO EXPERIMENT</span>
+    <h1 id="page-title">Async, made simple.</h1>
+    <p>
+      Explore user selection under real-world conditions.<br class="desktop-break" />
+      Adjust the response, then see how it feels.
+    </p>
+  </section>
   <form>
-    <fieldset>
-      <legend>User</legend>
-      <mat-form-field>
+    <fieldset class="user-panel">
+      <legend>
+        <mat-icon aria-hidden="true"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm0 8c-4 0-8 2-8 5v2h16v-2c0-3-4-5-8-5zm-6 5c0-1.5 3-3 6-3s6 1.5 6 3H6z"
+            /></svg
+        ></mat-icon>
+        User selection
+      </legend>
+      <p class="panel-description">Your next connection starts here.</p>
+      <mat-form-field appearance="outline">
         <mat-label>Select user</mat-label>
         <mat-select
           #userSelect
@@ -20,7 +48,10 @@
         @if (usersStore.isLoading()) {
           <mat-spinner [diameter]="16" matSuffix></mat-spinner>
         } @else {
-          <mat-icon matIconSuffix>keyboard_arrow_down</mat-icon>
+          <mat-icon matIconSuffix
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 9l5 5 5-5 1.4 1.4L12 16.8l-6.4-6.4z" /></svg
+          ></mat-icon>
         }
         @if (userForm.userId().invalid() && userForm.userId().touched()) {
           @if (usersStore.error()) {
@@ -31,16 +62,42 @@
           }
         }
       </mat-form-field>
+      <div class="selection-note">
+        <mat-icon aria-hidden="true"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M11 10h2v7h-2zm0-3h2v2h-2zm1-5a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16z"
+            /></svg
+        ></mat-icon>
+        <p>Open the menu to fetch users. Your response settings apply to the request.</p>
+      </div>
     </fieldset>
 
-    <fieldset>
-      <legend>HTTP Context</legend>
-      <p>latency</p>
+    <fieldset class="context-panel">
+      <legend>
+        <mat-icon aria-hidden="true"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 7h10v2H3V7zm14 0h4v2h-4V7zm-4-3h4v8h-4V4zM3 15h4v2H3v-2zm8 0h10v2H11v-2zm-4-3h4v8H7v-8z"
+            /></svg
+        ></mat-icon>
+        Response settings
+      </legend>
+      <p class="panel-description">Make room for the unexpected.</p>
+      <div class="control-label">
+        <span>Response delay</span
+        ><span class="value-chip">{{ model().httpContext.latency }} ms</span>
+      </div>
       <mat-slider min="0" max="5000" step="500" discrete showTickMarks>
-        <input matSliderThumb [formField]="userForm.httpContext.latency" />
+        <input
+          matSliderThumb
+          aria-label="Response delay in milliseconds"
+          [formField]="userForm.httpContext.latency"
+        />
       </mat-slider>
-      <p>error status</p>
-      <mat-form-field>
+      <div class="range-labels"><span>Instant</span><span>5 seconds</span></div>
+      <p class="control-label error-label">Simulated error</p>
+      <mat-form-field appearance="outline">
         <mat-label>Select error status</mat-label>
         <mat-select [formField]="userForm.httpContext.errorStatus">
           @for (status of errorStatuses; track status.value) {
@@ -48,7 +105,19 @@
           }
         </mat-select>
       </mat-form-field>
-      <button type="button" matButton color="primary" (click)="reset()">Reset</button>
+      <div class="panel-footer">
+        <span>Try a different scenario.</span
+        ><button type="button" matButton="tonal" (click)="reset()">
+          <mat-icon aria-hidden="true"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4a8 8 0 1 1-8 8h2a6 6 0 1 0 6-6v4L6 5l6-5v4z" /></svg></mat-icon
+          >Reset
+        </button>
+      </div>
     </fieldset>
   </form>
+  <footer class="page-footer">
+    <span class="status-dot" aria-hidden="true"></span>Built for the moments between request and
+    response.
+  </footer>
 </div>
