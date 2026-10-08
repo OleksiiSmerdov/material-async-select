@@ -18,6 +18,12 @@ html {
       density: 0,
     )
   );
+
+  @include mat.progress-spinner-overrides(
+    (
+      active-indicator-color: red,
+    )
+  );
 }
 
 body {
@@ -38,14 +44,19 @@ body {
   height: 100%;
 }
 
-.mat-mdc-form-field-has-icon-suffix {
-  .mat-mdc-select-arrow-wrapper {
-    display: none;
-  }
+.mat-mdc-form-field {
+  &-has-icon-suffix {
+    .mat-mdc-form-field-infix {
+      width: 146px;
+    }
 
-  .mat-mdc-form-field-icon-suffix {
-    position: relative;
-    left: -16px;
-    padding: 0;
+    .mat-mdc-select-arrow-wrapper {
+      display: none;
+    }
+
+    .mat-mdc-form-field-icon-suffix .mat-mdc-progress-spinner {
+      position: relative;
+      left: -1rem;
+    }
   }
 }
